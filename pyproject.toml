@@ -7,11 +7,11 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.13"
-pytest = "7.4.4"
-allure-pytest = "2.13.2"
-selene = "2.0.0rc3"
-appium-python-client = "2.11.1"
-python-dotenv = "1.0.1"
+pytest = "8.4.2"
+allure-pytest = "2.15.0"
+selene = "2.0.0rc9"
+appium-python-client = "^5.2.4"
+python-dotenv = "^1.2.1"
 
 [build-system]
 requires = ["poetry-core"]
