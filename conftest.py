@@ -3,14 +3,12 @@ from appium import webdriver
 from dotenv import load_dotenv
 from selene import browser
 import config
-#from utils import at
+import utils.allure
 
 
 def pytest_addoption(parser):
     parser.addoption(
-        "--context",
-        default="bstack",
-        help="Specify the test context"
+        "--context", default="local_emulator", help="Specify the test context"
     )
 
 
@@ -26,24 +24,23 @@ def context(request):
     return request.config.getoption("--context")
 
 
-@pytest.fixture(scope='function', autouse=True)
+@pytest.fixture(scope="function", autouse=True)
 def mobile_management(context):
-
 
     options = config.to_driver_options(context=context)
 
-    browser.config.driver = webdriver.Remote(options.get_capability('remote_url'), options=options)
+    browser.config.driver = webdriver.Remote(
+        options.get_capability("remote_url"), options=options
+    )
     browser.config.timeout = 10.0
 
     yield
 
-    #attach.add_screenshot()
-    #attach.add_xml()
-    #session_id = browser.driver.session_id
+    # attach.add_screenshot()
+    # attach.add_xml()
+    session_id = browser.driver.session_id
 
     browser.quit()
 
-    # if context == 'bstack':
-    #     attach.add_video(session_id)
-
-
+    if context == "bstack":
+        utils.allure.attach_bstack_video_android(session_id)
