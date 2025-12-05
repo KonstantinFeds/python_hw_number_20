@@ -8,7 +8,7 @@ import utils.allure
 
 def pytest_addoption(parser):
     parser.addoption(
-        "--context", default="local_emulator", help="Specify the test context"
+        "--context", default="bstack", help="Specify the test context"
     )
 
 
